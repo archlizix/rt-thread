@@ -9,13 +9,10 @@
  */
 
 #include <board.h>
-#include <drivers/adc.h>
-#include <rtdbg.h>
 #include <stdio.h>
 #include <rtthread.h>
-#include "board.h"
 
-#define LED_G  GET_PIN(E, 6)
+#define LED_G  GET_PIN(B, 0)
 
 int main(void)
 {
