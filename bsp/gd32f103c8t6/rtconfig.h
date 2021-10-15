@@ -11,15 +11,15 @@
 #define RT_THREAD_PRIORITY_32
 #define RT_THREAD_PRIORITY_MAX 32
 #define RT_TICK_PER_SECOND 100
-#define RT_USING_OVERFLOW_CHECK
-#define RT_USING_HOOK
-#define RT_USING_IDLE_HOOK
-#define RT_IDLE_HOOK_LIST_SIZE 4
+//#define RT_USING_OVERFLOW_CHECK
+//#define RT_USING_HOOK
+//#define RT_USING_IDLE_HOOK
+//#define RT_IDLE_HOOK_LIST_SIZE 4
 #define IDLE_THREAD_STACK_SIZE 256
 #define RT_USING_TIMER_SOFT
 #define RT_TIMER_THREAD_PRIO 4
 #define RT_TIMER_THREAD_STACK_SIZE 512
-#define RT_DEBUG
+//#define RT_DEBUG
 
 /* Inter-Thread communication */
 
@@ -38,7 +38,7 @@
 /* Kernel Device Object */
 
 #define RT_USING_DEVICE
-#define RT_USING_CONSOLE
+//#define RT_USING_CONSOLE
 #define RT_CONSOLEBUF_SIZE 128
 #define RT_CONSOLE_DEVICE_NAME "uart0"
 #define RT_VER_NUM 0x40003
@@ -55,18 +55,18 @@
 
 /* Command shell */
 
-#define RT_USING_FINSH
-#define FINSH_THREAD_NAME "tshell"
-#define FINSH_USING_HISTORY
-#define FINSH_HISTORY_LINES 5
-#define FINSH_USING_SYMTAB
-#define FINSH_USING_DESCRIPTION
-#define FINSH_THREAD_PRIORITY 20
-#define FINSH_THREAD_STACK_SIZE 2048
-#define FINSH_CMD_SIZE 80
-#define FINSH_USING_MSH
-#define FINSH_USING_MSH_DEFAULT
-#define FINSH_ARG_MAX 10
+//#define RT_USING_FINSH
+//#define FINSH_THREAD_NAME "tshell"
+//#define FINSH_USING_HISTORY
+//#define FINSH_HISTORY_LINES 5
+//#define FINSH_USING_SYMTAB
+//#define FINSH_USING_DESCRIPTION
+//#define FINSH_THREAD_PRIORITY 20
+//#define FINSH_THREAD_STACK_SIZE 2048
+//#define FINSH_CMD_SIZE 80
+//#define FINSH_USING_MSH
+//#define FINSH_USING_MSH_DEFAULT
+//#define FINSH_ARG_MAX 10
 
 /* Device virtual file system */
 
