@@ -5,13 +5,14 @@
  *
  * Change Logs:
  * Date           Author            Notes
- * 2021-08-20     BruceOu           the first version
+ * 2020-12-27     iysheng           first release
  */
 
 #ifndef __DRV_GPIO_H__
 #define __DRV_GPIO_H__
 
 #include <rtthread.h>
+#include <rthw.h>
 #include <rtdevice.h>
 #include <board.h>
 
@@ -19,33 +20,26 @@
 extern "C" {
 #endif
 
-#define GPIOA_BASE            (GPIO_BASE + 0x00000800UL)
-#define GPIOB_BASE            (GPIO_BASE + 0x00000C00UL)
-#define GPIOC_BASE            (GPIO_BASE + 0x00001000UL)
-#define GPIOD_BASE            (GPIO_BASE + 0x00001400UL)
-#define GPIOE_BASE            (GPIO_BASE + 0x00001800UL)
-#define GPIOF_BASE            (GPIO_BASE + 0x00001C00UL)
-#define GPIOG_BASE            (GPIO_BASE + 0x00002000UL)
+typedef struct {
+    __IO uint32_t CTLR1;
+    __IO uint32_t CTLR2;
+    __IO uint32_t DIR;
+    __IO uint32_t DOR;
+    __IO uint32_t BOR;
+    __IO uint32_t BCR;
+    __IO uint32_t LOCKR;
+} GPIO_TypeDef;
 
-#define __GD32_PORT(port)  GPIO##port##_BASE
+#define __GD32_PORT(port)  GPIO##port
 
-#define GD32_PIN(index, port, pin) {index, RCU_GPIO##port,      \
-                                    GPIO##port, GPIO_PIN_##pin, \
-                                    EXTI_SOURCE_GPIO##port,     \
-                                    EXTI_SOURCE_PIN##pin}
-#define GD32_PIN_DEFAULT            {-1, (rcu_periph_enum)0, 0, 0, 0, 0}
+#define GET_PIN(PORTx,PIN) (rt_base_t)((16 * ( ((rt_base_t)__GD32_PORT(PORTx) - (rt_base_t)GPIO_BASE)/(0x0400UL) )) + PIN)
 
-#define GET_PIN(PORTx, PIN) (rt_base_t)((16 * ( ((rt_base_t)__GD32_PORT(PORTx) - (rt_base_t)GPIOA_BASE)/(0x0400UL) )) + PIN)
+#define PIN_NUM(port, no) (((((port) & 0xFu) << 4) | ((no) & 0xFu)))
+#define PIN_PORT(pin) ((uint8_t)(((pin) >> 4) & 0xFu))
+#define PIN_NO(pin) ((uint8_t)((pin) & 0xFu))
 
-struct pin_index
-{
-    rt_int16_t index;
-    rcu_periph_enum clk;
-    rt_uint32_t gpio_periph;
-    rt_uint32_t pin;
-    rt_uint8_t port_src;
-    rt_uint8_t pin_src;
-};
+#define PIN_GDPORT(pin) (GPIO_BASE + (0x400u * PIN_PORT(pin)))
+#define PIN_GDPIN(pin) BIT(PIN_NO(pin))
 
 struct pin_irq_map
 {
