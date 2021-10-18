@@ -5,9 +5,7 @@ from building import *
 cwd     = os.path.join(str(Dir('#')), 'drivers')
 
 # add the general drivers.
-src = Split("""
-board.c
-""")
+src = []
 
 CPPPATH = [cwd]
 
@@ -30,6 +28,6 @@ if GetDepend('RT_USING_RTC'):
 if GetDepend('RT_USING_WDT'):
     src += ['drv_iwdt.c']
 
-group = DefineGroup('Drivers', src, depend = [''], CPPPATH = CPPPATH)
+group = DefineGroup('Drivers1', src, depend = [''], CPPPATH = CPPPATH)
 
 Return('group')

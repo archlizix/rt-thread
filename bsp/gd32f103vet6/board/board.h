@@ -16,7 +16,7 @@
 #include "drv_gpio.h"
 #include "drv_usart.h"
 
-#define GD32_SRAM_SIZE         48
+#define GD32_SRAM_SIZE         64
 #define GD32_SRAM_END          (0x20000000 + GD32_SRAM_SIZE * 1024)
 
 extern int __bss_end;

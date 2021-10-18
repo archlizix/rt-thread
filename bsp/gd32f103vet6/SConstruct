@@ -15,7 +15,7 @@ except:
     print(RTT_ROOT)
     exit(-1)
 
-TARGET = 'rtthread-gd32f10x.' + rtconfig.TARGET_EXT
+TARGET = 'rtthread.' + rtconfig.TARGET_EXT
 
 DefaultEnvironment(tools=[])
 env = Environment(tools = ['mingw'],
@@ -32,6 +32,16 @@ if rtconfig.PLATFORM == 'iar':
 
 Export('RTT_ROOT')
 Export('rtconfig')
+
+SDK_ROOT = os.path.abspath('./')
+
+if os.path.exists(SDK_ROOT + '/libraries'):
+    libraries_path_prefix = SDK_ROOT + '/libraries'
+else:
+    libraries_path_prefix = os.path.dirname(SDK_ROOT) + '/libraries'
+
+SDK_LIB = libraries_path_prefix
+Export('SDK_LIB')
 
 # prepare building environment
 objs = PrepareBuilding(env, RTT_ROOT, has_libcpu=False)

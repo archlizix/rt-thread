@@ -9,11 +9,6 @@ cwd = GetCurrentDir()
 src = Glob('GD32F10x_standard_peripheral/Source/*.c')
 src += [cwd + '/CMSIS/GD/GD32F10x/Source/system_gd32f10x.c']
 
-#add for startup script
-if rtconfig.CROSS_TOOL == 'gcc':
-    src += [cwd + '/CMSIS/GD/GD32F10x/Source/GCC/startup_gd32.s']
-    src += [cwd + '/CMSIS/GD/GD32F10x/Source/GCC/isr_tab.s']
-
 path = [
     cwd + '/CMSIS/GD/GD32F10x/Include',
     cwd + '/CMSIS',
