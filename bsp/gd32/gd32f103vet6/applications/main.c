@@ -15,7 +15,7 @@
 #include <rtthread.h>
 #include "board.h"
 
-#define LED_G  GET_PIN(E, 6)
+#define LED_G  GET_PIN(E, 15)
 
 int main(void)
 {
