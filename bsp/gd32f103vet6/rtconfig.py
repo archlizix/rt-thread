@@ -40,7 +40,7 @@ if PLATFORM == 'gcc':
     DEVICE = ' -mcpu=cortex-m3 -mthumb -ffunction-sections -fdata-sections'
     CFLAGS = DEVICE + ' -Dgcc' # -D' + PART_TYPE
     AFLAGS = ' -c' + DEVICE + ' -x assembler-with-cpp -Wa,-mimplicit-it=thumb '
-    LFLAGS = DEVICE + ' -Wl,--gc-sections,-Map=rtthread-gd32.map,-cref,-u,Reset_Handler -T gd32_rom.ld'
+    LFLAGS = DEVICE + ' -Wl,--gc-sections,-Map=rtthread-gd32.map,-cref,-u,Reset_Handler -T board/linker_scripts/link.ld'
 
     CPATH = ''
     LPATH = ''
@@ -64,7 +64,7 @@ elif PLATFORM == 'armcc':
     DEVICE = ' --cpu Cortex-M4'
     CFLAGS = DEVICE + ' --apcs=interwork'
     AFLAGS = DEVICE
-    LFLAGS = DEVICE + ' --info sizes --info totals --info unused --info veneers --list rtthread-gd32.map --scatter gd32_rom.sct'
+    LFLAGS = DEVICE + ' --info sizes --info totals --info unused --info veneers --list rtthread-gd32.map --scatter board/linker_scripts/link.sct'
 
     LFLAGS += ' --keep *.o(.rti_fn.*)   --keep *.o(FSymTab) --keep *.o(VSymTab)' 
 
@@ -116,7 +116,7 @@ elif PLATFORM == 'iar':
     AFLAGS += ' --cpu Cortex-M4'
     AFLAGS += ' --fpu None'
 
-    LFLAGS = ' --config gd32_rom.icf'
+    LFLAGS = ' --config board/linker_scripts/link.icf'
     LFLAGS += ' --redirect _Printf=_PrintfTiny'
     LFLAGS += ' --redirect _Scanf=_ScanfSmall'
     LFLAGS += ' --entry __iar_program_start'
