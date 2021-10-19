@@ -61,7 +61,7 @@ elif PLATFORM == 'armcc':
     LINK = 'armlink'
     TARGET_EXT = 'axf'
 
-    DEVICE = ' --cpu Cortex-M4'
+    DEVICE = ' --cpu Cortex-M3'
     CFLAGS = DEVICE + ' --apcs=interwork'
     AFLAGS = DEVICE
     LFLAGS = DEVICE + ' --info sizes --info totals --info unused --info veneers --list rtthread-gd32.map --scatter board/linker_scripts/link.sct'
@@ -71,7 +71,7 @@ elif PLATFORM == 'armcc':
     EXEC_PATH += '/ARM/ARMCC/bin'
     print(EXEC_PATH)
 
-    CFLAGS += ' --c99'
+    CFLAGS += ' --c11'
 
     if BUILD == 'debug':
         CFLAGS += ' -g -O0'
@@ -89,7 +89,7 @@ elif PLATFORM == 'iar':
     LINK = 'ilinkarm'
     TARGET_EXT = 'out'
 
-    DEVICE = ' -D USE_STDPERIPH_DRIVER' + ' -D GD32F30X_HD'
+    DEVICE = ' -D USE_STDPERIPH_DRIVER' + ' -D GD32F10X_HD'
 
     CFLAGS = DEVICE
     CFLAGS += ' --diag_suppress Pa050'
@@ -102,7 +102,7 @@ elif PLATFORM == 'iar':
     CFLAGS += ' --no_scheduling'
     CFLAGS += ' --debug'
     CFLAGS += ' --endian=little'
-    CFLAGS += ' --cpu=Cortex-M4'
+    CFLAGS += ' --cpu=Cortex-M3'
     CFLAGS += ' -e'
     CFLAGS += ' --fpu=None'
     CFLAGS += ' --dlib_config "' + EXEC_PATH + '/arm/INC/c/DLib_Config_Normal.h"'
@@ -113,7 +113,7 @@ elif PLATFORM == 'iar':
     AFLAGS += ' -s+'
     AFLAGS += ' -w+'
     AFLAGS += ' -r'
-    AFLAGS += ' --cpu Cortex-M4'
+    AFLAGS += ' --cpu Cortex-M3'
     AFLAGS += ' --fpu None'
 
     LFLAGS = ' --config board/linker_scripts/link.icf'
@@ -124,3 +124,9 @@ elif PLATFORM == 'iar':
     EXEC_PATH += '/arm/bin/'
     POST_ACTION = ''
 
+def dist_handle(BSP_ROOT, dist_dir):
+    import sys
+    cwd_path = os.getcwd()
+    sys.path.append(os.path.join(os.path.dirname(BSP_ROOT), 'tools'))
+    from sdk_dist import dist_do_building
+    dist_do_building(BSP_ROOT, dist_dir)
